@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>يوم في المدرسة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap">
+<style>
+:root{
+  --shell:#E6E5E0; --shell-ink:#141414; --shell-muted:#6B6962; --shell-line:#D7D5CE;
+  --ground:#EFEEE9; --surface:rgba(255,255,255,.72); --solid:#fff; --sunk:rgba(20,20,20,.06);
+  --ink:#141414; --ink-2:#55534D; --muted:#8C8A83; --line:rgba(20,20,20,.08);
+  --brand:#8A2A41; --brand-2:#5E1A2B; --brand-soft:#F6E8EC;
+  --hot:#E8764A; --hot-soft:#FBE7DC; --hot-ink:#8A3B1C;
+  --ok:#2E6B4F; --ok-soft:#E3EEE7; --warn:#7A5510; --warn-soft:#F6EACB;
+  --f:"Almarai",system-ui,"Segoe UI",Tahoma,sans-serif;
+  --glow:radial-gradient(620px 420px at 88% -6%,rgba(242,176,138,.38),transparent 70%),radial-gradient(620px 440px at 12% 108%,rgba(222,208,190,.55),transparent 70%);
+  color-scheme:light;
+}
+body[data-type="intl"]{--brand:#2F6B58;--brand-2:#1F3B34;--brand-soft:#E3EEE7}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--shell:#121211;--shell-ink:#ECEBE6;--shell-muted:#A09E97;--shell-line:#2E2D2A}}
+:root[data-theme="dark"]{--shell:#121211;--shell-ink:#ECEBE6;--shell-muted:#A09E97;--shell-line:#2E2D2A}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--shell);color:var(--shell-ink);font-family:var(--f);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.num{font-variant-numeric:tabular-nums}
+svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* top */
+.top{display:flex;align-items:center;gap:14px;padding:12px 18px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
+.mark{width:32px;height:32px;border-radius:10px;background:var(--hot);display:grid;place-items:center;color:#141414;font-weight:800;font-size:13px}
+.logo small{display:block;color:var(--shell-muted);font-weight:400;font-size:12px}
+.sp{flex:1}
+.seg{display:inline-flex;background:var(--sunk);border:1px solid var(--shell-line);border-radius:999px;padding:3px;gap:2px}
+.seg button{padding:6px 14px;border-radius:999px;font-size:12.5px;color:var(--shell-muted);white-space:nowrap}
+.seg button.on{background:var(--shell-ink);color:var(--shell);font-weight:700}
+.dots{display:flex;gap:6px;align-items:center}
+.dots button{width:9px;height:9px;border-radius:50%;background:var(--shell-line);padding:0}
+.dots button.on{background:var(--hot);width:22px;border-radius:9px}
+.dots button.done{background:var(--shell-muted)}
+
+/* stage */
+.stage{flex:1;display:grid;grid-template-columns:360px minmax(0,1fr);gap:0;margin:0 14px;border-radius:26px;background:var(--glow),var(--ground);color:var(--ink);overflow:hidden;min-height:0}
+.cap{padding:34px 30px 24px;display:flex;flex-direction:column;gap:14px;border-left:1px solid var(--line)}
+.time{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+.time b{font-size:30px;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+.who{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:4px 11px;border-radius:999px;background:var(--brand-soft);color:var(--brand-2);width:fit-content;font-weight:700}
+.cap h2{margin:0;font-size:27px;line-height:1.3;font-weight:800;letter-spacing:-.3px;text-wrap:balance}
+.cap p{margin:0;color:var(--ink-2);font-size:15px}
+.why{margin-top:4px;background:var(--surface);border:1px solid rgba(255,255,255,.85);border-radius:16px;padding:12px 14px;font-size:13.5px;color:var(--ink-2)}
+.why b{display:block;color:var(--ink);font-size:12px;margin-bottom:2px}
+.cap .fill{flex:1}
+.ctrl{display:flex;align-items:center;gap:8px}
+.b{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 18px;border-radius:999px;font-size:13.5px;border:1px solid rgba(20,20,20,.1);background:rgba(255,255,255,.85);white-space:nowrap}
+.b:hover{background:#fff}
+.b.pri{background:var(--ink);border-color:var(--ink);color:#fff}
+.b.hot{background:var(--hot);border-color:var(--hot);color:#141414;font-weight:700}
+.b.ic{padding:10px 12px}
+.b[disabled]{opacity:.35;pointer-events:none}
+.count{margin-inline-start:auto;font-size:12px;color:var(--muted)}
+.hint{font-size:11.5px;color:var(--muted)}
+
+.devwrap{position:relative;display:grid;place-items:center;padding:24px;min-height:0;overflow:hidden}
+.dev{transform-origin:center center;transition:opacity .35s ease}
+.dev.fade{opacity:0}
+
+/* phone */
+.phone{width:330px;height:680px;border-radius:52px;background:#141414;padding:12px;box-shadow:0 30px 70px rgba(60,40,20,.25)}
+.scr{position:relative;width:100%;height:100%;border-radius:41px;background:var(--glow),#EFEEE9;overflow:hidden;display:flex;flex-direction:column}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96px;height:28px;border-radius:20px;background:#141414;z-index:5}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:14px 26px 6px;font-size:13px;font-weight:700;direction:ltr}
+.ah{display:flex;align-items:center;gap:10px;padding:10px 16px 12px}
+.crest{width:34px;height:34px;border-radius:11px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;flex:none}
+.ah b{display:block;font-size:14px}
+.ah small{color:var(--muted);font-size:11.5px}
+.body{flex:1;overflow:hidden;padding:0 14px 14px;display:flex;flex-direction:column;gap:10px}
+.card{background:var(--surface);border:1px solid rgba(255,255,255,.9);border-radius:18px;padding:12px 14px;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 8px 24px rgba(60,40,20,.05)}
+.card h4{margin:0 0 6px;font-size:13.5px;display:flex;align-items:center;gap:6px}
+.sub{color:var(--muted);font-size:11.5px}
+.item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);opacity:0;transform:translateY(6px);transition:all .4s ease}
+.item:first-of-type{border-top:0}
+.item.in{opacity:1;transform:none}
+.item .ico{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:none}
+.item .t{font-size:12.8px;font-weight:700}
+.item .d{font-size:11.5px;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 9px;border-radius:999px;background:rgba(255,255,255,.8);border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.bad{background:var(--hot-soft);color:var(--hot-ink);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.chip.br{background:var(--brand-soft);color:var(--brand-2);border-color:transparent}
+.hl{box-shadow:0 0 0 2px var(--hot) inset;border-radius:12px}
+
+/* teacher list */
+.st{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:12px;background:rgba(255,255,255,.6);transition:background .3s}
+.st .av{width:28px;height:28px;border-radius:50%;background:var(--sunk);display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--ink-2)}
+.st .n{flex:1;font-size:12.8px}
+.st .s{font-size:11px;padding:3px 10px;border-radius:999px;background:var(--ok-soft);color:var(--ok);font-weight:700;transition:all .3s}
+.st.ab .s{background:var(--hot-soft);color:var(--hot-ink)}
+.st.lt .s{background:var(--warn-soft);color:var(--warn)}
+.st.ab{background:rgba(251,231,220,.6)}
+.sumbar{display:flex;gap:6px;flex-wrap:wrap}
+.save{margin-top:auto;background:var(--ink);color:#fff;border-radius:16px;padding:13px;text-align:center;font-weight:700;font-size:14px;transition:transform .15s}
+.save.press{transform:scale(.96)}
+.toast{position:absolute;left:14px;right:14px;bottom:18px;background:#141414;color:#fff;border-radius:16px;padding:12px 14px;font-size:12.5px;display:flex;gap:10px;align-items:center;transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.9,.3,1.2);z-index:6}
+.toast.in{transform:none}
+.toast .ok{width:26px;height:26px;border-radius:50%;background:#2E6B4F;display:grid;place-items:center;flex:none}
+
+/* lock screen */
+.scr:has(.lock) .sbar{background:#4a3b36;color:#fff}
+.lock{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:40px;color:#fff;background:linear-gradient(160deg,#4a3b36,#1f1b1a 60%,#2b2421)}
+.lock .big{font-size:68px;font-weight:300;letter-spacing:-2px;direction:ltr;line-height:1}
+.lock .date{font-size:14px;opacity:.85;margin-top:6px}
+.notif{margin:22px 12px 0;align-self:stretch;background:rgba(255,255,255,.88);color:#141414;border-radius:22px;padding:12px 14px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transform:translateY(-160%) scale(.95);opacity:0;transition:all .55s cubic-bezier(.2,.9,.3,1.15)}
+.notif.in{transform:none;opacity:1}
+.notif .h{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#55534D}
+.notif .h .crest{width:22px;height:22px;border-radius:6px;font-size:10px}
+.notif .h .tm{margin-inline-start:auto}
+.notif b{display:block;font-size:13.5px;margin-top:6px}
+.notif p{margin:2px 0 0;font-size:12.5px;color:#333}
+.buzz{animation:buzz .5s ease 2}
+@keyframes buzz{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px) rotate(-1deg)}40%{transform:translateX(4px) rotate(1deg)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+
+/* chat */
+.chat{flex:1;display:flex;flex-direction:column;gap:8px;padding:6px 2px;overflow:hidden}
+.bub{max-width:82%;padding:9px 12px;border-radius:16px;font-size:12.8px;opacity:0;transform:translateY(8px);transition:all .4s}
+.bub.in{opacity:1;transform:none}
+.bub.me{align-self:flex-start;background:var(--brand);color:#fff;border-bottom-right-radius:5px}
+.bub.them{align-self:flex-end;background:#fff;border-bottom-left-radius:5px}
+.bub .m{display:block;font-size:10.5px;opacity:.7;margin-top:3px;text-align:left}
+.sys{align-self:center;font-size:10.8px;color:var(--muted);background:rgba(255,255,255,.7);border-radius:999px;padding:4px 12px;opacity:0;transition:opacity .4s;text-align:center}
+.sys.in{opacity:1}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:10px 12px;background:rgba(255,255,255,.7);border-radius:14px;opacity:0;transition:opacity .3s}
+.typing.in{opacity:1}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:ty 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes ty{0%,100%{opacity:.3}50%{opacity:1}}
+.att{display:flex;gap:8px;align-items:center;margin-top:6px;background:var(--sunk);border-radius:10px;padding:6px 8px;font-size:11.5px}
+.composer{display:flex;gap:8px;align-items:center;background:#fff;border-radius:999px;padding:8px 8px 8px 14px;font-size:12.5px;color:var(--muted)}
+.composer .snd{margin-inline-start:auto;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center}
+
+/* pay */
+.bal{background:var(--brand);color:#fff;border-radius:20px;padding:16px}
+.bal small{opacity:.8;font-size:12px}
+.bal .amt{font-size:30px;font-weight:800;letter-spacing:-.5px}
+.paybtn{background:var(--ink);color:#fff;border-radius:16px;padding:13px;text-align:center;font-weight:700;transition:transform .15s}
+.paybtn.press{transform:scale(.96)}
+.paybtn.done{background:var(--ok)}
+.methods{display:flex;gap:6px;flex-wrap:wrap}
+.rec{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:18px 10px;opacity:0;transform:scale(.95);transition:all .45s}
+.rec.in{opacity:1;transform:none}
+.rec .big-ok{width:58px;height:58px;border-radius:50%;background:var(--ok);display:grid;place-items:center;color:#fff}
+.spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp 0.8s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* laptop */
+.laptop{width:900px}
+.lscr{background:#141414;border-radius:20px 20px 0 0;padding:12px 12px 0}
+.lin{height:540px;border-radius:10px 10px 0 0;background:var(--glow),#EFEEE9;overflow:hidden;display:grid;grid-template-columns:170px minmax(0,1fr)}
+.lbase{height:18px;background:linear-gradient(#cfcdc6,#b9b7b0);border-radius:0 0 18px 18px;margin:0 -30px;position:relative}
+.lbase:after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:7px;border-radius:0 0 8px 8px;background:#a9a7a0}
+.lside{background:rgba(20,20,20,.88);color:#fff;margin:10px 0 10px 10px;border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;gap:4px;font-size:12px}
+.lside .sch{display:flex;gap:8px;align-items:center;padding:4px 4px 10px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:6px}
+.lside .sch .crest{width:28px;height:28px;font-size:12px;border-radius:8px}
+.lside .sch b{font-size:11.5px;display:block;line-height:1.3}
+.lside .sch small{color:#A9A7A0;font-size:10px}
+.lside .nv{padding:7px 10px;border-radius:10px;color:#A9A7A0;display:flex;align-items:center;gap:8px}
+.lside .nv.on{background:rgba(255,255,255,.95);color:#141414;font-weight:700}
+.lside .nv svg{width:15px;height:15px}
+.lmain{padding:16px 18px;display:flex;flex-direction:column;gap:12px;overflow:hidden;position:relative}
+.lh{display:flex;align-items:flex-end;gap:12px}
+.lh h3{margin:0;font-size:19px;font-weight:800}
+.lh p{margin:0;color:var(--muted);font-size:12px}
+.lh .r{margin-inline-start:auto;display:flex;gap:8px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.kpi .k{font-size:11.5px;color:var(--ink-2)}
+.kpi .v{font-size:24px;font-weight:800;letter-spacing:-.4px;line-height:1.25}
+.kpi .v small{font-size:12px;color:var(--muted);font-weight:400}
+.aging{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ag .bar{height:8px;border-radius:6px;background:var(--sunk);overflow:hidden;margin:8px 0 4px}
+.ag .bar i{display:block;height:100%;width:0;border-radius:6px;transition:width .9s ease}
+table.t{width:100%;border-collapse:collapse;font-size:12px}
+.t th{font-weight:400;color:var(--muted);font-size:11px;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+.t td{padding:7px 8px;border-bottom:1px solid var(--line)}
+.t tr:last-child td{border-bottom:0}
+.t td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.btnl{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;font-size:12px;background:rgba(255,255,255,.85);border:1px solid var(--line)}
+.btnl.hot{background:var(--hot);border-color:var(--hot);color:#141414;font-weight:700;transition:transform .15s}
+.btnl.hot.press{transform:scale(.95)}
+.btnl.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.drawer{position:absolute;top:10px;bottom:10px;left:10px;width:330px;background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(60,40,20,.2);padding:14px 16px;transform:translateX(-112%);transition:transform .5s cubic-bezier(.2,.9,.3,1.05);display:flex;flex-direction:column;gap:8px;font-size:12px}
+.drawer.in{transform:none}
+.drawer h4{margin:0;font-size:15px}
+.ln{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.ln .a{font-variant-numeric:tabular-nums;white-space:nowrap}
+.ln.disc .a{color:var(--ok)}
+.ln.tot{border-bottom:0;font-weight:800;font-size:14px;padding-top:10px}
+.ln.tot .a{color:var(--hot-ink)}
+.bars{display:flex;align-items:flex-end;gap:14px;height:120px;padding-top:6px}
+.bars .c{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+.bars .c i{display:block;width:100%;max-width:46px;border-radius:8px 8px 4px 4px;background:var(--brand);height:0;transition:height .9s ease}
+.bars .c span{font-size:10.5px;color:var(--muted)}
+.bars .c b{font-size:11px}
+.prog{height:10px;border-radius:6px;background:var(--sunk);overflow:hidden;margin-top:8px}
+.prog i{display:block;height:100%;width:0;background:var(--ok);border-radius:6px;transition:width 1.2s ease}
+.lgrid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:10px}
+
+/* intro / outro */
+.full{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;gap:16px}
+.full h1{margin:0;font-size:44px;font-weight:800;letter-spacing:-.8px;line-height:1.2;text-wrap:balance;max-width:760px}
+.full p{margin:0;font-size:17px;color:var(--ink-2);max-width:600px}
+.full .kick{font-size:13px;color:var(--hot-ink);background:var(--hot-soft);padding:5px 14px;border-radius:999px;font-weight:700}
+.full .acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.tl{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.tl span{font-size:12px;color:var(--ink-2);background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:5px 12px}
+.recap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:880px;width:100%;margin-top:6px}
+.rc{background:var(--surface);border:1px solid rgba(255,255,255,.9);border-radius:18px;padding:14px 16px;text-align:right;opacity:0;transform:translateY(8px);transition:all .45s}
+.rc.in{opacity:1;transform:none}
+.rc .tm{font-size:11.5px;color:var(--muted)}
+.rc b{display:block;font-size:14.5px;margin:2px 0}
+.rc p{font-size:12.5px;margin:0;color:var(--ink-2)}
+
+.soon{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:4px 11px;border-radius:999px;background:var(--hot);color:#141414;font-weight:700;width:fit-content}
+.whorow{display:flex;gap:8px;flex-wrap:wrap}
+.appr{display:flex;gap:8px;margin-top:8px}
+.appr span{flex:1;text-align:center;padding:10px;border-radius:12px;font-weight:700;font-size:13px;transition:all .2s}
+.appr .no{background:var(--sunk)}
+.appr .yes{background:var(--ink);color:#fff}
+.appr .yes.press{transform:scale(.95)}
+.done-box{display:none;margin-top:8px;background:var(--ok-soft);color:var(--ok);border-radius:12px;padding:10px 12px;font-size:12.5px}
+.done-box.in{display:block}
+.ai{display:flex;flex-direction:column;gap:7px;flex:1;overflow:hidden}
+.ai .t td{padding:5px 8px}
+.ai .ans{padding:10px 12px}
+.q{align-self:flex-start;background:var(--ink);color:#fff;border-radius:16px 16px 16px 5px;padding:10px 14px;font-size:13px;max-width:70%;opacity:0;transform:translateY(6px);transition:all .4s}
+.q.in{opacity:1;transform:none}
+.ans{background:#fff;border-radius:16px;padding:12px 14px;font-size:12.5px;opacity:0;transform:translateY(6px);transition:all .45s;border:1px solid var(--line)}
+.ans.in{opacity:1;transform:none}
+.ans .src{font-size:11px;color:var(--muted);margin-top:6px;display:flex;gap:6px;align-items:center}
+.draft{border:1.5px dashed var(--hot);background:#FFF9F5}
+.typed:after{content:"▍";animation:ty 1s infinite}
+.foot{padding:10px 18px 14px;font-size:11.5px;color:var(--shell-muted);display:flex;gap:10px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .stage{grid-template-columns:1fr;grid-template-rows:auto minmax(420px,1fr)}
+  .cap{border-left:0;border-bottom:1px solid var(--line);padding:18px 18px 14px;gap:8px}
+  .cap h2{font-size:21px}
+  .cap p{font-size:14px}
+  .why,.cap .fill,.hint{display:none}
+  .time b{font-size:22px}
+  .full h1{font-size:30px}
+  .recap{grid-template-columns:1fr 1fr}
+  .dots{order:5;width:100%;justify-content:center}
+  .stage{margin:0 8px}
+}
+@media (max-width:520px){.recap{grid-template-columns:1fr}.top{padding:10px 12px}}
+@media (max-width:700px){
+  body{padding-bottom:86px}
+  .top{gap:8px 10px}
+  .logo small{display:none}
+  .seg button{padding:5px 11px;font-size:12px}
+  .stage{display:block;flex:none;margin:0 6px;border-radius:22px}
+  .cap{padding:14px 16px 12px;gap:6px}
+  .cap .ctrl{display:none}
+  .cap h2{font-size:20px}
+  .cap p{font-size:13.5px}
+  .time b{font-size:20px}
+  .devwrap{display:flex;justify-content:center;align-items:flex-start;padding:14px 10px 18px;overflow:hidden}
+  .foot{display:none}
+  /* laptop scenes reflow to a narrow screen */
+  .laptop{width:390px}
+  .lscr{padding:8px 8px 0;border-radius:16px 16px 0 0}
+  .lin{height:auto;grid-template-columns:1fr;min-height:0}
+  .lside{display:none}
+  .lmain{overflow:visible;padding:14px 12px}
+  .lh{flex-wrap:wrap}
+  .lh .r{margin-inline-start:0;flex-wrap:wrap}
+  .kpis,.aging{grid-template-columns:1fr 1fr}
+  .lgrid{grid-template-columns:1fr}
+  .lbase{margin:0 -14px;height:12px}
+  .drawer{position:relative;inset:auto;width:auto;transform:none;display:none;box-shadow:none;border:1px solid var(--line);margin-top:4px}
+  .drawer.in{display:flex}
+  .ai{overflow:visible}
+  .full{padding:28px 18px 24px}
+  .full h1{font-size:28px}
+  .full p{font-size:15px}
+  body .mctrl{display:flex}
+}
+.mctrl{display:none;position:fixed;left:10px;right:10px;bottom:10px;z-index:50;background:#141414;color:#fff;border-radius:22px;padding:8px;gap:8px;align-items:center;box-shadow:0 12px 30px rgba(0,0,0,.25);padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+.mctrl .b{border:0;padding:11px 14px}
+.mctrl .b.ic{background:rgba(255,255,255,.12);color:#fff}
+.mctrl .b.pri{flex:1;background:rgba(255,255,255,.12);color:#fff}
+.mctrl .b.hot{background:var(--hot)}
+.mctrl .count{color:#A09E97;margin:0 4px}
+.mctrl.hide{display:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body data-type="nat">
+
+<header class="top">
+  <div class="logo"><div class="mark">س</div><div>يوم في المدرسة<small>عرض سيستم المدارس · 4 دقايق</small></div></div>
+  <div class="sp"></div>
+  <div class="seg" role="group" aria-label="نوع المدرسة" id="typeSeg">
+    <button data-type="nat" class="on">مدرسة لغات</button>
+    <button data-type="intl">مدرسة دولية</button>
+  </div>
+  <div class="dots" id="dots" aria-label="المشاهد"></div>
+</header>
+
+<main class="stage" id="stage"></main>
+<nav class="mctrl hide" id="mctrl" aria-label="التحكم"></nav>
+
+<div class="foot"><span>بيانات تجريبية بالكامل · الأسامي والأرقام للعرض بس</span><span class="sp"></span><span>الأسهم ← → للتنقل · المسافة للتشغيل والإيقاف</span></div>
+
+<script>
+const IC={
+ sun:'<path d="M12 4V2M12 22v-2M4 12H2m20 0h-2M5.6 5.6 4.2 4.2m15.6 15.6-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4"/><circle cx="12" cy="12" r="4"/>',
+ alert:'<path d="M12 9v4m0 4h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+ users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-2.5-4.9"/>',
+ check:'<path d="m5 12 5 5L20 7"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+ send:'<path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/>',
+ money:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>',
+ chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
+ home:'<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/>',
+ bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
+ chat:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+ play:'<path d="m7 4 13 8-13 8z"/>',
+ pause:'<path d="M7 4h4v16H7zM14 4h4v16h-4z"/>',
+ next:'<path d="m15 18-6-6 6-6"/>',
+ prev:'<path d="m9 18 6-6-6-6"/>',
+ replay:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
+ bus:'<rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 11h16M8 21v-3M16 21v-3"/>',
+ lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+ grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'
+};
+const I=(n,s)=>`<svg class="i" viewBox="0 0 24 24" ${s?`style="width:${s}px;height:${s}px"`:''}>${IC[n]}</svg>`;
+
+/* ---------- data per school type ---------- */
+const DATA={
+ nat:{school:'مدرسة الريادة للغات',crest:'ر',manager:'أ. منى',cls:'4/2',subject:'English',teacher:'Miss Sara',tShort:'س',
+      kid:'يوسف أحمد',kidFirst:'يوسف',cur:'ج',inst:11500,bus:6000,disc:2300,paid2:5000,
+      aging:[[28,182000],[9,71500],[3,27000],[2,38000]],stages:[['KG',97],['ابتدائي',96],['إعدادي',95],['ثانوي',93]],
+      students:845,present:812,classes:30,collect:71,
+      stageNames:'رياض أطفال · ابتدائي · إعدادي · ثانوي'},
+ intl:{school:'Riyada International School',crest:'R',manager:'Ms. Mona',cls:'Year 4 · B',subject:'Science',teacher:'Mr. Karim',tShort:'K',
+      kid:'Youssef Ahmed',kidFirst:'يوسف',cur:'ج',inst:42000,bus:12000,disc:8400,paid2:20000,
+      aging:[[24,684000],[8,256000],[3,118000],[2,146000]],stages:[['KG',97],['Primary',96],['Middle',95],['Secondary',94]],
+      students:620,present:597,classes:26,collect:68,
+      stageNames:'KG · Primary · Middle · Secondary'}
+};
+let TYPE='nat';
+const D=()=>DATA[TYPE];
+const fmt=n=>n.toLocaleString('en-US');
+const money=n=>`${fmt(n)} ${D().cur}`;
+
+/* ---------- helpers ---------- */
+let TOKEN=0;
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+
+function phone(inner,time){return `<div class="phone"><div class="scr"><div class="island"></div><div class="sbar"><span class="num">${time}</span><span>●●● ▮</span></div>${inner}</div></div>`}
+function appHead(title,sub){const d=D();return `<div class="ah"><div class="crest">${d.crest}</div><div><b>${title}</b><small>${sub}</small></div></div>`}
+function laptop(navOn,main){const d=D();
+ const nav=[['home','الرئيسية'],['users','الطلاب'],['check','الغياب'],['money','الرسوم'],['chat','الرسايل'],['chart','التقارير']];
+ return `<div class="laptop"><div class="lscr"><div class="lin">
+   <div class="lside"><div class="sch"><div class="crest">${d.crest}</div><div><b>${d.school}</b><small>لوحة الإدارة</small></div></div>
+   ${nav.map(n=>`<div class="nv ${n[1]===navOn?'on':''}">${I(n[0])}${n[1]}</div>`).join('')}</div>
+   <div class="lmain">${main}</div></div></div><div class="lbase"></div></div>`}
+
+/* ---------- scenes ---------- */
+const SCENES=[
+{ id:'intro', full:true, dur:7000,
+  render(){const d=D();return `<section class="full">
+   <span class="kick">${d.school}</span>
+   <h1>يوم واحد في مدرسة… من غير ورق ولا جروبات واتساب</h1>
+   <p>4 دقايق بنمشي فيهم مع المدير والمدرس وولي الأمر والحسابات، من أول الصبح لآخر اليوم.</p>
+   <div class="tl"><span>7:45 ملخص الصبح</span><span>8:05 الغياب</span><span>8:05 ولي الأمر عرف</span><span>9:00 الموافقات</span><span>10:30 الرسايل</span><span>11:00 اسأل بياناتك</span><span>12:00 التحصيل</span><span>1:30 الدفع</span><span>3:00 الصورة كاملة</span></div>
+   <div class="acts"><button class="b hot" data-go="next">${I('play')} ابدأ اليوم</button></div></section>`}
+},
+{ id:'brief', t:'7:45', who:'موبايل المدير', dev:'phone', dur:13000,
+  title:()=>'المدير بيعرف وضع المدرسة قبل ما يوصل',
+  text:()=>'ملخص الصبح بيجمع أهم 4 حاجات محتاجة تصرف النهارده، من غير ما حد يبعتله تقرير.',
+  why:'بدل ما المدير يلف على المكاتب يسأل، المشاكل بتيجي له مترتبة بالأهمية، وكل واحدة بتفتح شاشتها.',
+  render(){const d=D();return phone(appHead('صباح الخير، '+d.manager,d.school+' · الأحد')+`<div class="body">
+   <div class="card"><h4>${I('sun',16)} ملخص الصبح <span class="chip br" style="margin-inline-start:auto">4 حاجات</span></h4>
+   <div class="item" data-i><div class="ico" style="background:var(--hot-soft);color:var(--hot-ink)">${I('clock',16)}</div><div><div class="t">فصلين لسه ماسجلوش الغياب</div><div class="d">3/1 و 5/2 · التذكير اتبعت للمدرسين</div></div></div>
+   <div class="item" data-i><div class="ico" style="background:var(--warn-soft);color:var(--warn)">${I('user',16)}</div><div><div class="t">حصة 3 في ${d.cls} من غير مدرس</div><div class="d">${d.teacher.split(' ')[0]==='Miss'?'Miss Dina':'Mr. Adel'} غايب · فيه 3 مدرسين فاضيين</div></div></div>
+   <div class="item" data-i><div class="ico" style="background:var(--brand-soft);color:var(--brand-2)">${I('users',16)}</div><div><div class="t">3 طلاب غابوا 3 أيام الأسبوع ده</div><div class="d">محتاجين متابعة مع أولياء الأمور</div></div></div>
+   <div class="item" data-i><div class="ico" style="background:var(--ok-soft);color:var(--ok)">${I('check',16)}</div><div><div class="t">طلبين إذن غياب مستنيين موافقتك</div><div class="d">وصلوا امبارح بالليل من الأبليكيشن</div></div></div>
+   </div>
+   <div class="card"><h4>${I('chart',16)} النهارده</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip ok">الحضور لسه بيتسجل</span><span class="chip">${d.classes} فصل</span><span class="chip">${fmt(d.students)} طالب</span></div></div>
+  </div>`,'7:45')},
+  async play(ok){const it=$$('[data-i]');for(const e of it){await wait(900);if(!ok())return;e.classList.add('in')}await wait(1200);if(!ok())return;it[1].classList.add('hl')}
+},
+{ id:'teacher', t:'8:05', who:'موبايل المدرس', dev:'phone', dur:15000,
+  title:()=>'الغياب بيتسجل في 10 ثواني',
+  text:()=>'الكل «حاضر» من الأول، والمدرس بيعلّم على الغايب والمتأخر بس، ويدوس حفظ.',
+  why:'الغياب بيتسجل في وقته فعلًا، مش آخر اليوم من كشف ورق. وده أساس كل اللي جاي.',
+  render(){const d=D();const names=TYPE==='nat'?['آدم خالد','جنى محمود','يوسف أحمد','ليلى حسن','مالك سامي','نور طارق','عمر وليد','سلمى ياسر']:['Adam Khaled','Jana Mahmoud','Youssef Ahmed','Laila Hassan','Malek Samy','Nour Tarek','Omar Walid','Salma Yasser'];
+   return phone(appHead(`حصة 1 · ${d.cls}`,`${d.subject} · ${d.teacher}`)+`<div class="body">
+   <div class="sumbar" id="sum"><span class="chip ok">28 حاضر</span><span class="chip">الكل حاضر افتراضيًا</span></div>
+   <div style="display:flex;flex-direction:column;gap:5px">${names.map((n,i)=>`<div class="st" data-st="${i}"><div class="av">${n[0]}</div><div class="n">${n}</div><div class="s">حاضر</div></div>`).join('')}</div>
+   <div class="sub" style="text-align:center">+ 20 طالب تاني</div>
+   <div class="save" id="save">حفظ الغياب</div>
+  </div><div class="toast" id="toast"><div class="ok">${I('check',15)}</div><div><b>اتسجل</b><br>الإشعار وصل لـ 3 أولياء أمور في نفس اللحظة</div></div>`,'8:05')},
+  async play(ok){const mark=async(i,cls,txt)=>{await wait(1100);if(!ok())return false;const r=$(`[data-st="${i}"]`);r.classList.add(cls);r.querySelector('.s').textContent=txt;return true};
+   if(!await mark(2,'ab','غايب'))return; if(!await mark(5,'lt','متأخر 8:12'))return; if(!await mark(7,'ab','غايب'))return;
+   await wait(500);if(!ok())return;$('#sum').innerHTML='<span class="chip ok">25 حاضر</span><span class="chip bad">2 غايب</span><span class="chip warn">1 متأخر</span>';
+   await wait(1200);if(!ok())return;$('#save').classList.add('press');await wait(180);$('#save').classList.remove('press');
+   await wait(250);if(!ok())return;$('#toast').classList.add('in')}
+},
+{ id:'parent', t:'8:05', who:'موبايل ولي الأمر', dev:'phone', dur:14000,
+  title:()=>'وفي نفس الثانية… ولي الأمر عرف',
+  text:()=>`من وقت ما المدرس داس «حفظ»، لحد ما موبايل والدة ${D().kidFirst} رن: ثواني.`,
+  why:'مفيش مكالمات الضهر «ابني فين؟». ولو فيه عذر، ولي الأمر بيبعت طلب إذن من نفس الإشعار.',
+  render(){const d=D();return phone(`<div class="lock" id="lock"><div class="big">8:05</div><div class="date">الأحد</div>
+   <div class="notif" id="nf"><div class="h"><div class="crest">${d.crest}</div>${d.school}<span class="tm">دلوقتي</span></div>
+   <b>${d.kidFirst} اتسجل غايب النهارده</b><p>الحصة الأولى · ${d.cls}. لو فيه عذر تقدر تبعت طلب إذن من الأبليكيشن.</p></div>
+   <div class="notif" id="nf2" style="margin-top:8px"><div class="h"><div class="crest">${d.crest}</div>${d.school}<span class="tm">من 3 دقايق</span></div>
+   <b>واجب ${d.subject} جديد</b><p>Workbook صفحة 34 · التسليم بكرة</p></div></div>`,'8:05')},
+  async play(ok){await wait(1300);if(!ok())return;$('#nf').classList.add('in');$('.phone').classList.add('buzz');await wait(1800);if(!ok())return;$('#nf2').classList.add('in')}
+},
+{ id:'approve', t:'9:00', who:'موبايل المدير', dev:'phone', dur:13000,
+  title:()=>'الموافقة بزرار، من أي مكان',
+  text:()=>`والدة ${D().kidFirst} بعتت طلب إذن ومعاه شهادة طبية. المدير وافق من موبايله، والغياب اتحول لوحده «غياب بإذن».`,
+  why:'كل الموافقات في مكان واحد: إذن الغياب، والخصم الاستثنائي، والطالب فوق سعة الفصل. والمدير يقدر يفوّض حد تاني وهو في إجازة.',
+  render(){const d=D();return phone(appHead('الموافقات',`${d.school} · 2 مستنيين`)+`<div class="body">
+   <div class="card"><h4>${I('doc',16)} إذن غياب <span class="chip warn" style="margin-inline-start:auto">مستني</span></h4>
+    <div style="font-size:13px;font-weight:700">${d.kid} · ${d.cls}</div>
+    <div class="sub">النهارده · السبب: مرض · طلبته والدته 8:20</div>
+    <div class="att">${I('doc',14)} شهادة طبية.jpg</div>
+    <div class="appr" id="appr"><span class="no">رفض</span><span class="yes" id="yes">وافق</span></div>
+    <div class="done-box" id="okb">${I('check',13)} اتوافق · الغياب بقى «غياب بإذن» ومش هيدخل في الغياب المتكرر. والدته اتبلغت.</div>
+   </div>
+   <div class="card"><h4>${I('money',16)} خصم استثنائي <span class="chip" style="margin-inline-start:auto">مستني</span></h4>
+    <div class="sub">طلب من الحسابات · 15% لظروف الأسرة · السبب مكتوب</div></div>
+   <div class="card"><div class="sub">${I('users',13)} تقدر تفوّض الموافقات للوكيل وإنت في إجازة</div></div>
+  </div>`,'9:00')},
+  async play(ok){await wait(2600);if(!ok())return;const y=$('#yes');y.classList.add('press');await wait(180);y.classList.remove('press');
+   await wait(200);if(!ok())return;$('#appr').style.display='none';$('#okb').classList.add('in')}
+},
+{ id:'chat', t:'10:30', who:'موبايل ولي الأمر', dev:'phone', dur:15000,
+  title:()=>'التواصل من جوه المدرسة، مش من الواتساب',
+  text:()=>'ولي الأمر بيكلم المدرس من «كراسة المتابعة». ومحدش فيهم بيشوف رقم موبايل التاني.',
+  why:'نهاية جروبات الواتساب ورسايل الساعة 11 بالليل. والمدرس بيحدد ساعات رده، وكل الكلام محفوظ.',
+  render(){const d=D();return phone(appHead(d.teacher,`${d.subject} · بيرد من 2 لـ 4`)+`<div class="body">
+   <div class="chat">
+    <div class="sys in">كراسة المتابعة · ${d.kidFirst} · ${d.cls}</div>
+    <div class="bub me" id="b1">صباح الخير، ${d.kidFirst} تعبان النهارده وهيرجع بكرة إن شاء الله. ممكن حضرتك تبعتي الواجب؟<span class="m">10:30</span></div>
+    <div class="sys" id="s1">${I('lock',12)} رقمك مش ظاهر للمدرس، ورقمه مش ظاهر ليك</div>
+    <div class="typing" id="ty"><i></i><i></i><i></i></div>
+    <div class="bub them" id="b2">ألف سلامة عليه. الواجب على الأبليكيشن في «الواجبات»، ومرفق الصفحة هنا.<div class="att">${I('doc',14)} Workbook p.34.pdf</div><span class="m">2:10</span></div>
+   </div>
+   <div class="composer">اكتب رسالة…<span class="snd">${I('send',14)}</span></div>
+  </div>`,'10:30')},
+  async play(ok){await wait(800);if(!ok())return;$('#b1').classList.add('in');await wait(1600);if(!ok())return;$('#s1').classList.add('in');
+   await wait(1500);if(!ok())return;$('#ty').classList.add('in');await wait(1800);if(!ok())return;$('#ty').style.display='none';$('#b2').classList.add('in')}
+},
+{ id:'ai', t:'11:00', who:'لابتوب المدير', dev:'laptop', dur:17000, soon:true,
+  title:()=>'المدير بيسأل السيستم بالكلام العادي',
+  text:()=>'من غير ما يدوّر في تقارير: سؤال واحد، والإجابة من أرقام السيستم نفسه. وبعدين «اكتبلي رسالة»، والمسودة جاهزة.',
+  why:'أي حاجة بيكتبها المساعد بتفضل مسودة لحد ما المدير يوافق. والبيانات الحساسة (الصحة، والديانة، وأرقام الموبايل) مابتروحش للموديل.',
+  render(){const d=D();const st=TYPE==='nat'?[['ليلى حسن','3/1',5],['مالك سامي','5/2',4],['عمر وليد','4/2',4]]:[['Laila Hassan','Year 3 · A',5],['Malek Samy','Year 5 · B',4],['Omar Walid','Year 4 · B',4]];
+   return laptop('التقارير',`<div class="lh"><div><h3>اسأل بياناتك</h3><p>المساعد بيجاوب من بيانات ${d.school} بس</p></div><div class="r"><span class="soon">✦ قريبًا</span></div></div>
+   <div class="ai">
+    <div class="q" id="q1"><span id="q1t"></span></div>
+    <div class="ans" id="a1"><b>3 طلاب غابوا أكتر من 3 أيام من غير إذن الشهر ده:</b>
+     <table class="t" style="margin-top:6px"><tr><th>الطالب</th><th>الفصل</th><th>أيام الغياب</th><th>رائد الفصل اتواصل؟</th></tr>
+     ${st.map((r,i)=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="n">${r[2]}</td><td>${i===0?'<span class="chip ok">أيوه</span>':'<span class="chip bad">لسه</span>'}</td></tr>`).join('')}</table>
+     <div class="src">${I('chart',12)} من سجل الغياب · آخر تحديث 10:58</div></div>
+    <div class="q" id="q2"><span id="q2t"></span></div>
+    <div class="ans draft" id="a2"><div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><b>مسودة رسالة لأولياء أمور ${st[1][0]} و${st[2][0]}</b><span class="chip warn" style="margin-inline-start:auto">مسودة · محتاجة موافقتك</span></div>
+     السلام عليكم، لاحظنا إن ابنكم غاب 4 أيام الشهر ده. حابين نطمن عليه ونشوف إزاي نساعده. ممكن نحدد ميعاد مع رائد الفصل الأسبوع ده؟
+     <div style="display:flex;gap:8px;margin-top:10px"><span class="btnl">عدّل</span><span class="btnl hot">راجعت · ابعت لـ 2 أولياء أمور</span></div></div>
+   </div>`)},
+  async play(ok){const type=async(id,txt)=>{const e=$(id);for(let i=1;i<=txt.length;i++){if(!ok())return false;e.textContent=txt.slice(0,i);await wait(38)}return true};
+   await wait(500);if(!ok())return;$('#q1').classList.add('in');if(!await type('#q1t','مين غاب أكتر من 3 أيام الشهر ده؟'))return;
+   await wait(900);if(!ok())return;$('#a1').classList.add('in');await wait(2600);if(!ok())return;
+   $('#q2').classList.add('in');if(!await type('#q2t','اكتبلي رسالة لأولياء أمور اللي رائد الفصل لسه ماكلمهمش'))return;
+   await wait(900);if(!ok())return;$('#a2').classList.add('in');if(innerWidth<=700)setTimeout(()=>$('#a2')&&$('#a2').scrollIntoView({behavior:'smooth',block:'center'}),150)}
+},
+{ id:'fees', t:'12:00', who:'لابتوب الحسابات', dev:'laptop', dur:17000,
+  title:()=>'التحصيل بزرار واحد',
+  text:()=>'الحسابات شايفة المتأخرات متقسمة بالمدة، وبتبعت تذكير لكل المتأخرين مرة واحدة، وكشف حساب أي طالب في ثانية.',
+  why:'دي أكتر حاجة بتوجع المدارس. التذكير بيوصل إشعار وإيميل فيه المبلغ وكود الدفع، والخصومات بتبان سطر واضح في كشف الحساب.',
+  render(){const d=D();const tot=d.aging.reduce((a,b)=>a+b[0],0);const mx=Math.max(...d.aging.map(a=>a[1]));
+   const lbl=['أقل من 30 يوم','30 لـ 60 يوم','60 لـ 90 يوم','أكتر من 90 يوم'];const col=['var(--warn)','var(--hot)','var(--hot-ink)','#5E1A2B'];
+   const rest=d.inst-d.disc-d.paid2;const fam=TYPE==='nat'?[['يوسف أحمد','4/2','قسط 2 · جزئي',rest],['مريم سامح','2/1','قسط 2',11500],['آدم خالد','4/2','قسط 2',11500],['فريدة نبيل','6/3','قسط 1 و 2',23000]]:[['Youssef Ahmed','Year 4 · B','Inst. 2 · partial',rest],['Mariam Sameh','Year 2 · A','Inst. 2',42000],['Adam Khaled','Year 4 · B','Inst. 2',42000],['Farida Nabil','Year 6 · C','Inst. 1 + 2',84000]];
+   return laptop('الرسوم',`<div class="lh"><div><h3>المتأخرات</h3><p>القسط التاني · ${tot} أسرة</p></div><div class="r"><span class="btnl">${I('doc',14)} تصدير Excel</span><span class="btnl hot" id="remind">${I('send',14)} ابعت تذكير لكل المتأخرين (${tot})</span></div></div>
+   <div class="aging">${d.aging.map((a,i)=>`<div class="card ag"><div class="sub">${lbl[i]}</div><div style="font-weight:800;font-size:17px" class="num">${money(a[1])}</div><div class="bar"><i data-w="${Math.round(a[1]/mx*100)}" style="background:${col[i]}"></i></div><div class="sub">${a[0]} أسرة</div></div>`).join('')}</div>
+   <div class="card" style="padding:8px 10px"><table class="t"><tr><th>الطالب</th><th>الفصل</th><th>البند</th><th>الباقي</th><th></th></tr>
+   ${fam.map((f,i)=>`<tr ${i===0?'id="row0"':''}><td>${f[0]}</td><td>${f[1]}</td><td>${f[2]}</td><td class="n">${money(f[3])}</td><td><span class="chip">كشف حساب</span></td></tr>`).join('')}</table></div>
+   <div class="drawer" id="drawer"><div class="sub">كشف حساب</div><h4>${d.kid} · ${d.cls}</h4><span class="chip br" style="width:fit-content">أخ في نفس المدرسة · خصم إخوات 10%</span>
+    <div class="ln"><span>القسط الأول</span><span class="a">${money(d.inst)}</span></div>
+    <div class="ln"><span>القسط التاني</span><span class="a">${money(d.inst)}</span></div>
+    <div class="ln"><span>اشتراك الباص</span><span class="a">${money(d.bus)}</span></div>
+    <div class="ln disc"><span>خصم إخوات 10% (الرسوم الدراسية)</span><span class="a">− ${money(d.disc)}</span></div>
+    <div class="ln"><span>مدفوع · إيصال 1021 (القسط الأول)</span><span class="a">− ${money(d.inst)}</span></div>
+    <div class="ln"><span>مدفوع · إيصال 1088 (الباص)</span><span class="a">− ${money(d.bus)}</span></div>
+    <div class="ln"><span>مدفوع · إيصال 1342 (دفعة جزئية)</span><span class="a">− ${money(d.paid2)}</span></div>
+    <div class="ln tot"><span>الباقي</span><span class="a">${money(d.inst-d.disc-d.paid2)}</span></div>
+    <div class="sub">بيتبعت لولي الأمر الأساسي PDF أو من الأبليكيشن</div></div>`)},
+  async play(ok){await wait(500);if(!ok())return;$$('[data-w]').forEach(e=>e.style.width=e.dataset.w+'%');
+   await wait(2600);if(!ok())return;const b=$('#remind');b.classList.add('press');await wait(180);b.classList.remove('press');b.innerHTML='<span class="spin" style="border-color:rgba(0,0,0,.2);border-top-color:#141414"></span> بيتبعت…';
+   await wait(1300);if(!ok())return;b.classList.add('done');b.innerHTML=`${I('check',14)} اتبعت · إشعار + إيميل`;
+   await wait(1800);if(!ok())return;$('#row0').classList.add('hl');await wait(700);if(!ok())return;$('#drawer').classList.add('in');if(innerWidth<=700)setTimeout(()=>$('#drawer')&&$('#drawer').scrollIntoView({behavior:'smooth',block:'center'}),150)}
+},
+{ id:'pay', t:'1:30', who:'موبايل ولي الأمر', dev:'phone', dur:14000,
+  title:()=>'ولي الأمر بيدفع من مكانه',
+  text:()=>'التذكير وصل فيه المبلغ وكود الدفع. ولي الأمر دفع من الموبايل، والإيصال وصله، والحسابات شافت الدفعة من غير ما حد يدخلها.',
+  why:'تحصيل أسرع من غير طوابير عند الخزنة. والدفع كاش أو تحويل بيفضل شغال عادي للي عايز.',
+  render(){const d=D();const rest=d.inst-d.disc-d.paid2;return phone(appHead('الرسوم',`${d.kid} · ${d.cls}`)+`<div class="body">
+   <div class="bal"><small>الباقي على القسط التاني</small><div class="amt num">${money(rest)}</div><small>بعد خصم الإخوات والدفعة الجزئية</small></div>
+   <div class="card"><h4>${I('money',16)} ادفع بـ</h4><div class="methods"><span class="chip br">كود فوري</span><span class="chip">كارت</span><span class="chip">محفظة موبايل</span><span class="chip">إنستاباي</span></div>
+   <div class="sub" style="margin-top:8px">كود فوري: <b class="num" style="color:var(--ink)">7731 2209 54</b></div></div>
+   <div class="paybtn" id="pb">ادفع ${money(rest)}</div>
+   <div class="rec" id="rec"><div class="big-ok">${I('check',28)}</div><b>اتدفع</b><div class="sub">إيصال رقم 1407 · وصلك على الإيميل كمان</div><span class="chip ok">القسط التاني: مدفوع</span></div>
+  </div>`,'1:30')},
+  async play(ok){await wait(2200);if(!ok())return;const b=$('#pb');b.classList.add('press');await wait(180);b.classList.remove('press');b.innerHTML='<span class="spin"></span>';
+   await wait(1500);if(!ok())return;b.classList.add('done');b.innerHTML=`${I('check',16)} تم`;await wait(400);if(!ok())return;$('#rec').classList.add('in')}
+},
+{ id:'dash', t:'3:00', who:'لابتوب المدير', dev:'laptop', dur:15000,
+  title:()=>'آخر اليوم: الصورة كاملة في شاشة واحدة',
+  text:()=>'الحضور، والتحصيل، واللي مستني موافقة المدير، واللي محتاج متابعة. كل ده بيتحدث لحظة بلحظة.',
+  why:'المدير بياخد قراره على أرقام النهارده، مش على تقرير آخر الشهر.',
+  render(){const d=D();return laptop('الرئيسية',`<div class="lh"><div><h3>${d.school}</h3><p>الأحد · بيتحدث لحظة بلحظة</p></div></div>
+   <div class="kpis">
+    <div class="card kpi"><div class="k">حضور النهارده</div><div class="v num"><span data-cnt="${(d.present/d.students*100).toFixed(1)}" data-dec="1">0</span><small>%</small></div><div class="sub">${fmt(d.present)} من ${fmt(d.students)}</div></div>
+    <div class="card kpi"><div class="k">الفصول اللي سجلت الغياب</div><div class="v num">${d.classes}<small> / ${d.classes}</small></div><span class="chip ok">${I('check',12)} كله اتسجل</span></div>
+    <div class="card kpi"><div class="k">تحصيل القسط التاني</div><div class="v num"><span data-cnt="${d.collect}">0</span><small>%</small></div><div class="prog"><i data-pw="${d.collect}"></i></div></div>
+    <div class="card kpi"><div class="k">مستني موافقتك</div><div class="v num">1</div><div class="sub">خصم استثنائي</div></div>
+   </div>
+   <div class="lgrid">
+    <div class="card"><h4 style="margin:0">الحضور حسب المرحلة</h4><div class="bars">${d.stages.map(s=>`<div class="c"><b class="num">${s[1]}%</b><i data-h="${(s[1]-85)*7}"></i><span>${s[0]}</span></div>`).join('')}</div></div>
+    <div class="card"><h4 style="margin:0 0 4px">محتاج متابعة</h4>
+     <div class="item in"><div class="ico" style="background:var(--hot-soft);color:var(--hot-ink)">${I('users',15)}</div><div><div class="t">3 طلاب غابوا 3 أيام</div><div class="d">رائد الفصل كلّم 2 منهم</div></div></div>
+     <div class="item in"><div class="ico" style="background:var(--warn-soft);color:var(--warn)">${I('money',15)}</div><div><div class="t">${d.aging.reduce((a,b)=>a+b[0],0)} أسرة اتبعتلهم تذكير</div><div class="d">11 دفعوا من بعد التذكير</div></div></div>
+     <div class="item in"><div class="ico" style="background:var(--ok-soft);color:var(--ok)">${I('chat',15)}</div><div><div class="t">96% من الرسايل اترد عليها</div><div class="d">في ساعات رد المدرسين</div></div></div>
+    </div>
+   </div>`)},
+  async play(ok){await wait(400);if(!ok())return;$$('[data-h]').forEach(e=>e.style.height=e.dataset.h+'px');$$('[data-pw]').forEach(e=>e.style.width=e.dataset.pw+'%');
+   for(const e of $$('[data-cnt]')){const to=+e.dataset.cnt,dec=+(e.dataset.dec||0);const t0=performance.now();const step=t=>{if(!ok())return;const p=Math.min(1,(t-t0)/1200);e.textContent=(to*p).toFixed(dec);if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}}
+},
+{ id:'outro', full:true, dur:0,
+  render(){const d=D();const rc=[['7:45','المدير عرف المشاكل قبل ما يوصل','ملخص الصبح بأهم 4 حاجات'],['8:05','الغياب اتسجل في 10 ثواني','من موبايل المدرس'],['8:05','ولي الأمر عرف في نفس اللحظة','من غير ولا مكالمة'],['9:00','الإذن اتوافق عليه من الموبايل','والغياب اتعدّل لوحده'],['10:30','الكلام مع المدرس من جوه المدرسة','من غير أرقام شخصية ولا جروبات'],['11:00','المدير سأل السيستم بالكلام العادي','والمسودة جاهزة لمراجعته (قريبًا)'],['12:00','تذكير لكل المتأخرين بزرار','وكشف حساب أي طالب في ثانية'],['1:30','ولي الأمر دفع من موبايله','والإيصال وصله فورًا'],['3:00','المدير شايف كل ده في شاشة واحدة','بيتحدث لحظة بلحظة']];
+   return `<section class="full"><span class="kick">${d.school} · آخر اليوم</span><h1>ده كان يوم واحد</h1><p>من غير ورق، ولا كشوف، ولا جروبات واتساب. وكل ده بهوية المدرسة واسمها.</p>
+   <div class="recap">${rc.map(r=>`<div class="rc"><div class="tm">${r[0]}</div><b>${r[1]}</b><p>${r[2]}</p></div>`).join('')}</div>
+   <div class="acts"><a class="b pri" href="demo.html" style="text-decoration:none">${I('grid')} جرّب السيستم بنفسك</a><button class="b" data-go="0">${I('replay')} شوف اليوم تاني</button></div>
+   <p style="font-size:14px;margin-top:6px">إحنا لسه بنبني، وعايزين نسمع منك: إيه أكتر حاجة بتوجعكم في المدرسة؟</p></section>`},
+  async play(ok){for(const e of $$('.rc')){await wait(250);if(!ok())return;e.classList.add('in')}}
+}
+];
+
+/* ---------- engine ---------- */
+let CUR=0, PLAYING=false, TIMER=null;
+const stage=$('#stage');
+
+function renderDots(){$('#dots').innerHTML=SCENES.map((s,i)=>`<button aria-label="مشهد ${i+1}" class="${i===CUR?'on':i<CUR?'done':''}" data-dot="${i}"></button>`).join('')}
+
+function fit(){const w=$('.devwrap'),dv=$('.dev');if(!w||!dv)return;const el=dv.firstElementChild;if(!el)return;
+ dv.style.transform='none';dv.style.zoom='';dv.style.margin='';const nw=el.offsetWidth,nh=el.offsetHeight;const aw=w.clientWidth-32,ah=w.clientHeight-32;
+ const mob=innerWidth<=700;let s;if(mob){const top=w.getBoundingClientRect().top+scrollY;const room=innerHeight-96-Math.min(top,innerHeight*0.45);s=Math.min(1,aw/nw,el.classList.contains('phone')?Math.max(.66,room/nh):1);dv.style.zoom=s;dv.style.width='';dv.style.height='';return}else s=Math.min(1,aw/nw,ah/nh);dv.style.transform=`scale(${s})`;dv.style.width=nw+'px';dv.style.height=nh+'px';dv.style.margin=`${-(nh-nh*s)/2}px ${-(nw-nw*s)/2}px`}
+
+function show(i){
+ CUR=Math.max(0,Math.min(SCENES.length-1,i));const sc=SCENES[CUR];const tok=++TOKEN;const ok=()=>tok===TOKEN;
+ clearTimeout(TIMER);
+ if(sc.full){stage.innerHTML=sc.render()}
+ else{stage.innerHTML=`<section class="cap">
+   <div class="time">${I('clock',16)}<b class="num">${sc.t}</b></div>
+   <div class="whorow"><span class="who">${I(sc.dev==='phone'?'user':'grid',13)} ${sc.who}</span>${sc.soon?'<span class="soon">✦ قريبًا · الذكاء الاصطناعي</span>':''}</div>
+   <h2>${sc.title()}</h2><p>${sc.text()}</p>
+   <div class="why"><b>ليه ده يفرق معاك</b>${sc.why}</div>
+   <div class="fill"></div>
+   <div class="ctrl"><button class="b ic" data-go="prev" aria-label="اللي فات">${I('prev')}</button>
+    <button class="b pri" data-go="toggle">${PLAYING?I('pause')+' وقّف':I('play')+' شغّل لوحده'}</button>
+    <button class="b ic hot" data-go="next" aria-label="اللي بعده">${I('next')}</button>
+    <span class="count num">${CUR} / ${SCENES.length-2}</span></div>
+   <div class="hint">اضغط التالي، أو خليه يمشي لوحده</div>
+  </section><section class="devwrap"><div class="dev fade">${sc.render()}</div></section>`;
+  setTimeout(()=>{try{fit()}catch(e){}setTimeout(()=>{const d=$('.dev');if(d)d.classList.remove('fade')},40)},20);}
+ renderDots();
+ const mc=$('#mctrl');if(mc){mc.classList.toggle('hide',!!sc.full);mc.innerHTML=sc.full?'':`<button class="b ic" data-go="prev" aria-label="اللي فات">${I('prev')}</button><button class="b pri" data-go="toggle">${PLAYING?I('pause')+' وقّف':I('play')+' شغّل لوحده'}</button><span class="count num">${CUR} / ${SCENES.length-2}</span><button class="b hot" data-go="next" aria-label="اللي بعده">${I('next')} التالي</button>`}
+ if(innerWidth<=700)scrollTo({top:0});
+ sc.play&&sc.play(ok);
+ if(PLAYING&&sc.dur&&CUR<SCENES.length-1)TIMER=setTimeout(()=>{if(ok())show(CUR+1)},sc.dur);
+ if(CUR===SCENES.length-1)PLAYING=false;
+}
+
+document.addEventListener('click',e=>{
+ const g=e.target.closest('[data-go]');const dt=e.target.closest('[data-dot]');const ty=e.target.closest('[data-type]');
+ if(g){const v=g.dataset.go;
+  if(v==='next'){if(CUR===0)PLAYING=true;show(CUR+1)}
+  else if(v==='prev')show(CUR-1);
+  else if(v==='toggle'){PLAYING=!PLAYING;show(CUR)}
+  else show(+v)}
+ if(dt){PLAYING=false;show(+dt.dataset.dot)}
+ if(ty){TYPE=ty.dataset.type;document.body.dataset.type=TYPE;$$('#typeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.type===TYPE));show(CUR)}
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowLeft'){PLAYING=false;show(CUR+1)}
+ else if(e.key==='ArrowRight'){PLAYING=false;show(CUR-1)}
+ else if(e.key===' '){e.preventDefault();PLAYING=!PLAYING;show(CUR)}
+});
+addEventListener('resize',fit);if(document.fonts)document.fonts.ready.then(()=>{try{fit()}catch(e){}});
+show(0);
+</script>
+</body>
+</html>

@@ -242,6 +242,12 @@ table.t{width:100%;border-collapse:collapse;font-size:12px}
 .ans .src{font-size:11px;color:var(--muted);margin-top:6px;display:flex;gap:6px;align-items:center}
 .draft{border:1.5px dashed var(--hot);background:#FFF9F5}
 .typed:after{content:"▍";animation:ty 1s infinite}
+.cta{max-width:560px;width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.9);border-radius:22px;padding:20px 22px;display:flex;flex-direction:column;gap:6px;margin-top:8px;box-shadow:0 8px 24px rgba(60,40,20,.06)}
+.cta b{font-size:19px}
+.cta p{margin:0;font-size:15px;color:var(--ink-2)}
+.cta .sub2{font-size:13.5px;color:var(--muted)}
+.cta .ct{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:6px;font-weight:700}
+.b.sm{padding:6px 12px;font-size:12.5px}
 .foot{padding:10px 18px 14px;font-size:11.5px;color:var(--shell-muted);display:flex;gap:10px;flex-wrap:wrap}
 
 @media (max-width:900px){
@@ -356,6 +362,8 @@ const DATA={
       students:620,present:597,classes:26,collect:68,
       stageNames:'KG · Primary · Middle · Secondary'}
 };
+/* contact shown at the end of the tour: fill name and phone when agreed */
+const CONTACT={name:'',phone:''};
 let TYPE='nat';
 const D=()=>DATA[TYPE];
 const fmt=n=>n.toLocaleString('en-US');
@@ -553,9 +561,10 @@ const SCENES=[
 { id:'outro', full:true, dur:0,
   render(){const d=D();const rc=[['7:45','المدير عرف المشاكل قبل ما يوصل','ملخص الصبح بأهم 4 حاجات'],['8:05','الغياب اتسجل في 10 ثواني','من موبايل المدرس'],['8:05','ولي الأمر عرف في نفس اللحظة','من غير ولا مكالمة'],['9:00','الإذن اتوافق عليه من الموبايل','والغياب اتعدّل لوحده'],['10:30','الكلام مع المدرس من جوه المدرسة','من غير أرقام شخصية ولا جروبات'],['11:00','المدير سأل السيستم بالكلام العادي','والمسودة جاهزة لمراجعته (قريبًا)'],['12:00','تذكير لكل المتأخرين بزرار','وكشف حساب أي طالب في ثانية'],['1:30','ولي الأمر دفع من موبايله','والإيصال وصله فورًا'],['3:00','المدير شايف كل ده في شاشة واحدة','بيتحدث لحظة بلحظة']];
    return `<section class="full"><span class="kick">${d.school} · آخر اليوم</span><h1>ده كان يوم واحد</h1><p>من غير ورق، ولا كشوف، ولا جروبات واتساب. وكل ده بهوية المدرسة واسمها.</p>
-   <div class="recap">${rc.map(r=>`<div class="rc"><div class="tm">${r[0]}</div><b>${r[1]}</b><p>${r[2]}</p></div>`).join('')}</div>
-   <div class="acts"><a class="b pri" href="demo.html" style="text-decoration:none">${I('grid')} جرّب السيستم بنفسك</a><button class="b" data-go="0">${I('replay')} شوف اليوم تاني</button></div>
-   <p style="font-size:14px;margin-top:6px">إحنا لسه بنبني، وعايزين نسمع منك: إيه أكتر حاجة بتوجعكم في المدرسة؟</p></section>`},
+   <div class="cta"><b>عايز تشوف السيستم كامل على مدرستك؟</b><p>نقعد 20 دقيقة: نسمع منك أكتر حاجة بتتعبكم، ونوريك السيستم شغال.</p>
+   ${CONTACT.phone?`<div class="ct"><span>${CONTACT.name}</span><span class="num" id="ctPhone">${CONTACT.phone}</span><button class="b sm" data-copy="1">${I('check',14)} انسخ الرقم</button></div>`:'<p class="sub2">رد على اللي بعتلك اللينك ده، ونحدد ميعاد يناسبك.</p>'}</div>
+      <div class="recap">${rc.map(r=>`<div class="rc"><div class="tm">${r[0]}</div><b>${r[1]}</b><p>${r[2]}</p></div>`).join('')}</div>
+   <div class="acts"><button class="b" data-go="0">${I('replay')} شوف اليوم تاني</button></div></section>`},
   async play(ok){for(const e of $$('.rc')){await wait(250);if(!ok())return;e.classList.add('in')}}
 }
 ];
@@ -596,6 +605,7 @@ function show(i){
 }
 
 document.addEventListener('click',e=>{
+ const cp=e.target.closest('[data-copy]');if(cp){const t=CONTACT.phone;const done=()=>{cp.textContent='اتنسخ';};try{navigator.clipboard.writeText(t).then(done,()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('ctPhone'));const sel=getSelection();sel.removeAllRanges();sel.addRange(r)})}catch(err){}return}
  const g=e.target.closest('[data-go]');const dt=e.target.closest('[data-dot]');const ty=e.target.closest('[data-type]');
  if(g){const v=g.dataset.go;
   if(v==='next'){if(CUR===0)PLAYING=true;show(CUR+1)}

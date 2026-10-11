@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://fatmaelsayedinformatique.github.io/school-day-demo/app.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#101413">
+<meta name="theme-color" content="#EFEEE9">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="منصة المدرسة">
@@ -435,41 +435,6 @@ b,strong,h1,h2,h3{font-weight:700}
 .bub .img6 b{font-size:13px}
 .seen{align-self:flex-start;font-size:10.5px;color:var(--muted);margin-top:-4px;display:flex;gap:4px;align-items:center}
 .seen.ok{color:var(--brand)}
-
-
-/* ================= v7 · immersive on the phone ================= */
-@media (max-width:759px){.stage{padding:0;gap:0;background:#101413}.device{border-radius:0;box-shadow:none}}
-/* dark top band: header + kids + today hero read as one surface */
-.screen>.safe-top,.screen>.hd{background:#101413;color:#fff}
-.hd{padding-bottom:12px}
-.hd .t small{color:rgba(255,255,255,.55)}
-.hd .crest{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
-.rolepill{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.14)}
-.hd.rb{border-radius:0 0 26px 26px;padding-bottom:14px;box-shadow:0 12px 30px rgba(16,20,19,.18);position:relative;z-index:2}
-.band{margin-top:-1px}
-.band .kids{background:#101413}
-.band .kids{padding:2px 16px 14px;margin:0}
-.band .kid{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
-.band .kid.on{background:#fff;color:#141414;border-color:#fff}
-.band .day{margin:0;border-radius:0 0 34px 34px;box-shadow:0 22px 44px rgba(16,20,19,.25);padding-top:6px}
-.scroll>div>.band:first-child,.scroll>div>.day.t:first-child{margin-top:-1px}
-.day.t.flush{margin:0 0 16px;border-radius:0 0 34px 34px}
-.after-band{height:18px}
-/* first-open choreography */
-.intro .pers i.ok{animation:fillIn .9s var(--ease) both}
-.intro .pers i:nth-child(1){animation-delay:.15s}.intro .pers i:nth-child(2){animation-delay:.3s}.intro .pers i:nth-child(3){animation-delay:.45s}.intro .pers i:nth-child(4){animation-delay:.6s}.intro .pers i:nth-child(5){animation-delay:.75s}.intro .pers i:nth-child(6){animation-delay:.9s}
-.intro .day .k b{animation:enter .6s var(--ease) both}
-.nav-anim .stack>*,.nav-anim .hs>*{animation:enter .5s var(--ease) both}
-.nav-anim .stack>*:nth-child(2),.nav-anim .hs>*:nth-child(2){animation-delay:.06s}
-.nav-anim .stack>*:nth-child(3),.nav-anim .hs>*:nth-child(3){animation-delay:.12s}
-.nav-anim .stack>*:nth-child(4),.nav-anim .hs>*:nth-child(4){animation-delay:.18s}
-.nav-anim .stack>*:nth-child(5){animation-delay:.24s}.nav-anim .stack>*:nth-child(6){animation-delay:.3s}
-/* tab bar: dark floating pill, same family as the top */
-.tabs{background:rgba(16,20,19,.94)!important;border:1px solid rgba(255,255,255,.06)!important;box-shadow:0 14px 34px rgba(16,20,19,.3)!important;border-radius:26px!important;margin:0 14px calc(12px + env(safe-area-inset-bottom,0px))!important;padding:10px 6px!important;backdrop-filter:blur(16px)}
-.tabs button{color:rgba(255,255,255,.45)}
-.tabs button.on{color:#fff}
-.tabs button.on::after{bottom:auto!important;top:-7px;width:5px!important;height:5px!important;border-radius:50%;background:var(--hot)!important}
-@media (min-width:760px){.tabs{margin-bottom:20px!important}}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -2137,7 +2102,7 @@ const S={
  chat:[{me:true,t:'مساء الخير يا أستاذة، يوسف بيقول إن فيه واجب نحو، هو صفحة كام؟',m:'امبارح 8:10'},{me:false,t:'أهلاً بحضرتك، كراسة النحو صفحة 9، والتمارين من 1 لـ 4.',m:'امبارح 8:40 · اتقرت'}],typing:false,
  log:null,done:null,push:null,sheet:null,toast:null,hint:null,seenHint:{},
  alert:{aud:'parents',urgent:true,sent:false,read:0,total:1042,text:'بسبب الأمطار، الانصراف النهاردة الساعة 12:30 والأتوبيسات هتتحرك في نفس الميعاد.'},
- reminded:{},q:{log:false,saw:false,alert:false},ctaShown:false,book:{slot:'بعد الضهر',role:'صاحب مدرسة'},inbox:[],flash:null,pending:{parent:[],teacher:[],principal:[]},intro:{},navAnim:true,tThread:null,tRead:{},tTyping:false,bc:false
+ reminded:{},q:{log:false,saw:false,alert:false},ctaShown:false,book:{slot:'بعد الضهر',role:'صاحب مدرسة'},inbox:[],flash:null,pending:{parent:[],teacher:[],principal:[]},tThread:null,tRead:{},tTyping:false,bc:false
 };
 const ended=p=>!DAY.find(d=>d.p===p).now&&!DAY.find(d=>d.p===p).up;
 const items=k=>SUB[k].items||[];
@@ -2160,7 +2125,7 @@ function thUnread(th){if(S.tRead[th.id])return 0;if(th.id==='yousef')return S.in
 /* ================= pieces ================= */
 const crest=(cls='')=>`<span class="crest ${cls}">${letter}</span>`;
 const avc=(t,c,sz=36)=>`<span class="av" style="background:${c};width:${sz}px;height:${sz}px">${t}</span>`;
-function header(){const R=ROLE[S.role];const banded=!S.log&&S.tab[S.role]==='today'&&(S.role==='parent'||S.role==='teacher');return `<div class="safe-top"></div><div class="hd ${banded?'':'rb'}">${crest()}<div class="t"><b>${esc(SCHOOL.name)}</b><small>${S.role==='parent'?'أبليكيشن ولي الأمر':S.role==='teacher'?'أبليكيشن المدرس':'لوحة المدير'}</small></div><button class="rolepill" data-a="roles" id="rolepill">${I('swap','width:15px;height:15px')}${R.n}<span class="av" style="background:${R.c==='#141414'?'#55534D':R.c}">${I(R.i,'width:14px;height:14px')}</span></button></div>
+function header(){const R=ROLE[S.role];return `<div class="safe-top"></div><div class="hd">${crest()}<div class="t"><b>${esc(SCHOOL.name)}</b><small>${S.role==='parent'?'أبليكيشن ولي الأمر':S.role==='teacher'?'أبليكيشن المدرس':'لوحة المدير'}</small></div><button class="rolepill" data-a="roles" id="rolepill">${I('swap','width:15px;height:15px')}${R.n}<span class="av" style="background:${R.c==='#141414'?'#55534D':R.c}">${I(R.i,'width:14px;height:14px')}</span></button></div>
  <button class="quest" hidden data-a="roles">${I('spark','width:16px;height:16px;color:#E8764A')}<b>${questN()<3?'جرّب: '+['سجّل حصة كمدرس','شوفها عند ولي الأمر','ابعت تنبيه كمدير'][[S.q.log,S.q.saw,S.q.alert].findIndex(x=>!x)]:'جرّبت السلسلة كلها · احجز اجتماع'}</b><span class="st">${[S.q.log,S.q.saw,S.q.alert].map(x=>`<i class="${x?'on':''}"></i>`).join('')}</span></button>`}
 function tabs(){const T={parent:[['today','اليوم','home'],['plan','الخطة','book'],['chat','الكراسة','chat'],['fees','الرسوم','wallet']],teacher:[['today','النهاردة','home'],['inbox','الكراسة','chat'],['more','المزيد','grade']],principal:[['today','النهاردة','chart'],['alert','تنبيه','bell'],['more','المنصة','spark']]}[S.role];
  const tab=S.tab[S.role];return `<nav class="tabs">${T.map(t=>`<button class="${tab===t[0]?'on':''}" data-tab="${t[0]}">${I(t[2])}${t[1]}${t[0]==='inbox'&&TTH.some(thUnread)?`<span class="bd">${TTH.filter(thUnread).length}</span>`:''}</button>`).join('')}</nav>`}
@@ -2168,7 +2133,7 @@ function tabs(){const T={parent:[['today','اليوم','home'],['plan','الخط
 /* ---------- parent ---------- */
 function pToday(){
  const kids=`<div class="kids">${['يوسف','سارة'].map((n,i)=>`<button class="kid ${S.kid===i?'on':''}" data-kid="${i}"><span class="av" style="background:${i?'#B5651D':'#3B4FA8'}">${n[0]}</span>${n}</button>`).join('')}</div>`;
- if(S.kid===1)return `<div class="band">`+kids+`<div class="day" style="padding-top:14px"><div class="k"><div><b>سارة</b><div class="live"><i></i>النهاردة · مباشر</div></div><small>الثلاثاء 6 أكتوبر<br>الأول الابتدائي</small></div><div class="sum"><b>3 من 3</b> حصص اتسجلت</div></div></div><div class="after-band"></div><div style="display:none" class="hero"><small>الثلاثاء · الأول الابتدائي</small><b>يوم سارة النهاردة</b><div class="pills"><span>3 من 3 حصص اتسجلت</span></div></div><div class="card"><h3>${I('book')} اتشرح النهاردة</h3>${[['Ph','Phonics','Ms. Laila','Letter sounds: sh, ch','#2F6B58'],['Ma','Maths','Ms. Noha','Counting to 50','#3B4FA8'],['عر','اللغة العربية','أ. منى','حرف الجيم','#B5651D']].map(r=>`<div class="ls"><span class="s" style="background:${r[4]}">${r[0]}</span><div class="x"><b>${r[1]}</b><small>${r[2]}</small><div class="it">${I('check')}${r[3]}</div></div></div>`).join('')}</div>`;
+ if(S.kid===1)return kids+`<div class="hero"><small>الثلاثاء · الأول الابتدائي</small><b>يوم سارة النهاردة</b><div class="pills"><span>3 من 3 حصص اتسجلت</span></div></div><div class="card"><h3>${I('book')} اتشرح النهاردة</h3>${[['Ph','Phonics','Ms. Laila','Letter sounds: sh, ch','#2F6B58'],['Ma','Maths','Ms. Noha','Counting to 50','#3B4FA8'],['عر','اللغة العربية','أ. منى','حرف الجيم','#B5651D']].map(r=>`<div class="ls"><span class="s" style="background:${r[4]}">${r[0]}</span><div class="x"><b>${r[1]}</b><small>${r[2]}</small><div class="it">${I('check')}${r[3]}</div></div></div>`).join('')}</div>`;
  const endedL=DAY.filter(d=>SUB[d.k].items&&ended(d.p)),lg=endedL.filter(d=>S.logs[d.p]).length;
  const hw=DAY.filter(d=>S.logs[d.p]&&S.logs[d.p].hw).map(d=>[d.k,S.logs[d.p].hw]).concat([['art','إحضار أدوات الرسم']]);
  const rows=DAY.map(d=>{const s=SUB[d.k],g=S.logs[d.p],who=d.cover||s.t,fl=S.flash==='p'+d.p?'flash':'';
@@ -2176,11 +2141,11 @@ function pToday(){
   if(d.now)return `<div class="ls">${tile(d.k)}<div class="x"><b>${s.n}</b><small>${who}</small></div><span class="pp now">دلوقتي</span></div>`;
   if(g)return `<div class="ls ${fl}" id="ls${d.p}">${tile(d.k)}<div class="x"><b>${s.n}</b><small>${who}</small>${g.items.map(i=>`<div class="it">${I('check')}${esc(s.items[i])}</div>`).join('')}${g.hw?`<span class="hw">${I('file')} واجب: ${esc(g.hw)}</span>`:''}</div><span class="tm num">${d.tm}</span></div>`;
   return `<div class="ls pend" id="ls${d.p}">${tile(d.k)}<div class="x"><b>${s.n}</b><small>${who}</small>${d.p===1?`<button class="tryit" data-a="role:teacher">سجّلها كمدرس ${I('arrowl','width:14px;height:14px')}</button>`:''}</div><span class="pp">لسه ماتسجلتش</span></div>`}).join('');
- return `<div class="band">`+kids+`
+ return kids+`
  <div class="day" id="dayhero"><div class="k"><div><b>يوسف</b><div class="live"><i></i>النهاردة · مباشر</div></div><small>الثلاثاء 6 أكتوبر<br>الرابع الابتدائي · 4/2</small></div>
  <div class="sum"><b>${lg} من ${endedL.length}</b> حصص اتسجلت · <b>${hw.length}</b> مطلوب لبكره</div>
  <div class="pers">${DAY.map(d=>slot(!SUB[d.k].items?(ended(d.p)?'na':'up'):d.now?'now':d.up?'up':S.logs[d.p]?'ok':'pend',S.flash==='p'+d.p)).join('')}</div>
- <div class="plab num">${DAY.map(d=>`<span>${d.tm}</span>`).join('')}</div></div></div><div class="after-band"></div>
+ <div class="plab num">${DAY.map(d=>`<span>${d.tm}</span>`).join('')}</div></div>
  ${S.alert.sent?`<div class="card" style="border:1.5px solid var(--hot)"><h3 style="color:var(--hotink)">${I('bell')} تنبيه من المدير${S.alert.urgent?' · عاجل':''}</h3><div style="font-size:13.5px">${esc(S.alert.text)}</div></div>`:''}
  <div class="sect">اتشرح النهاردة<span data-tab="plan">الخطة كاملة</span></div><div class="stack" id="todaycard">${rows}</div>
  <div class="sect">مطلوب لبكره<small>الأربع</small></div><div class="hs">${hw.map(h=>`<div class="hc" style="--sc:${SUB[h[0]].c}">${tile(h[0])}<b>${SUB[h[0]].n}</b><span>${esc(h[1])}</span></div>`).join('')}</div>
@@ -2199,7 +2164,7 @@ function pFees(){return `<div class="title">الرسوم</div>${S.paid?`<div cla
 
 /* ---------- teacher ---------- */
 function tToday(){const pend=TEACH.filter(t=>!t.cover&&!S.tlog[t.p]);
- return `<div class="day t flush"><div class="k"><div><b>${pend.length?pend.length+' حصص':'تمام ✓'}</b><div class="live"><i></i>${pend.length?'خلصت ولسه ماتسجلتش':'كل حصصك اتسجلت'}</div></div><small>أ. سامية فتحي<br>اللغة العربية</small></div>
+ return `<div class="day t"><div class="k"><div><b>${pend.length?pend.length+' حصص':'تمام ✓'}</b><div class="live"><i></i>${pend.length?'خلصت ولسه ماتسجلتش':'كل حصصك اتسجلت'}</div></div><small>أ. سامية فتحي<br>اللغة العربية</small></div>
  <div class="pers" style="--n:4;margin-top:14px">${TEACH.map(t=>slot(t.cover||S.tlog[t.p]?'ok':'pend',S.flashT&&S.tlog[t.p])).join('')}</div>
  <div class="plab num" style="--n:4">${TEACH.map(t=>`<span>${t.cls}</span>`).join('')}</div>
  ${pend.length?`<div class="act"><button class="btn" id="logbtn" data-a="log:${pend[0].p}">${I('check')} سجّل حصة ${pend[0].cls}</button></div>`:''}</div>
@@ -2249,7 +2214,7 @@ function onboarding(){const i=S.obi;
 
 /* ================= render ================= */
 const scrollMem={};
-function render(){setTimeout(()=>{S.dir=null;S.navAnim=false;if(!S.ob&&!S.intro[S.role]&&S.tab[S.role]==='today'){clearTimeout(render.it);const r=S.role;render.it=setTimeout(()=>{S.intro[r]=1},1600)}},0);
+function render(){setTimeout(()=>{S.dir=null},0);
  const dev=document.getElementById('device');
  const sc=dev.querySelector('.scroll');if(sc)scrollMem[S.role+S.tab[S.role]]=sc.scrollTop;
  if(S.ob){dev.innerHTML=onboarding();if(S.obi===0)playWA();return}
@@ -2258,7 +2223,7 @@ function render(){setTimeout(()=>{S.dir=null;S.navAnim=false;if(!S.ob&&!S.intro[
  else if(S.role==='teacher')body=S.log?tLog():tab==='inbox'?tInbox():tab==='more'?tMore():tToday();
  else body=tab==='alert'?mAlert():tab==='more'?mMore():mToday();
  const composer=S.role==='teacher'&&tab==='inbox'&&S.tThread&&!S.log?`<div class="qr6">${QUICK.map((q,n)=>`<button data-a="tq:${n}">${q}</button>`).join('')}</div><div class="composer"><button class="att" data-a="tattach" aria-label="صورة">${I('plus','width:18px;height:18px')}</button><input id="tmsg" placeholder="اكتبي رد…"><button data-a="tsend" aria-label="ابعت">${I('send','width:18px;height:18px')}</button></div>`:S.role==='parent'&&tab==='chat'&&S.thread?`<div class="composer"><input id="msg" placeholder="اكتب رسالة…" value=""><button data-a="sendmsg" aria-label="ابعت">${I('send','width:18px;height:18px')}</button></div>`:'';
- dev.innerHTML=`<div class="screen">${header()}<div class="scroll" id="scroll"><div class="${S.dir||(S.navAnim?'enter':'')} ${S.navAnim||S.dir?'nav-anim':''} ${S.intro[S.role]?'':'intro'}">${body}</div></div>${composer}${S.log?'':tabs()}</div>
+ dev.innerHTML=`<div class="screen">${header()}<div class="scroll" id="scroll"><div class="${S.dir||'enter'}">${body}</div></div>${composer}${S.log?'':tabs()}</div>
  ${S.push?`<div class="push" data-a="openpush">${crest()}<div class="x"><div class="tt"><span>${esc(SCHOOL.name)}</span><span>دلوقتي</span></div><b>${esc(S.push.t)}</b>${esc(S.push.b)}</div></div>`:''}
  ${S.done?`<div class="done"><div class="ck">${I('check')}</div><div class="sec num">${S.done.secs}<small style="font-size:17px"> ث</small></div><b>اتسجلت</b><p>وصلت لأولياء أمور ${S.done.n} فصول في شاشة «اليوم»</p>${confetti()}</div>`:''}
  ${S.sheet?sheet():''}${S.wipe?`<div class="wipe" style="--wc:${S.wipe==='principal'?'#1D1D1F':ROLE[S.wipe].c}">${'<span class="ic">'+I(ROLE[S.wipe].i)+'</span>'}<small>دلوقتي إنت</small><b>${ROLE[S.wipe].n}</b></div>`:''}${S.toast?`<div class="toast">${I('check')}${esc(S.toast)}</div>`:''}`;
@@ -2324,15 +2289,15 @@ function tSend(tx,img){const th=TTH.find(x=>x.id===S.tThread);if(!th)return;vib(
   if(th.reply&&!th.replied){th.replied=1;S.tTyping=true;render();setTimeout(()=>{S.tTyping=false;th.msgs.push({them:1,t:th.reply,m:'دلوقتي'});vib(20);render()},2000)}},1100)}
 document.addEventListener('click',e=>{
  const t=e.target.closest('[data-a],[data-tab],[data-kid]');if(!t)return;
- if(t.dataset.tab){S.navAnim=true;const ord=['today','plan','chat','fees','inbox','more','alert'];S.dir=ord.indexOf(t.dataset.tab)>ord.indexOf(S.tab[S.role])?'slideL':'slideR';S.tab[S.role]=t.dataset.tab;S.log=null;if(t.dataset.tab!=='chat')S.thread=null;if(t.dataset.tab!=='inbox')S.tThread=null;render();return}
+ if(t.dataset.tab){const ord=['today','plan','chat','fees','inbox','more','alert'];S.dir=ord.indexOf(t.dataset.tab)>ord.indexOf(S.tab[S.role])?'slideL':'slideR';S.tab[S.role]=t.dataset.tab;S.log=null;if(t.dataset.tab!=='chat')S.thread=null;if(t.dataset.tab!=='inbox')S.tThread=null;render();return}
  if(t.dataset.kid){S.kid=+t.dataset.kid;render();return}
  const a=t.dataset.a,[k,v]=a.split(':');
  if(k==='closesheet'){if(e.target.closest('[data-stop]')&&!e.target.closest('[data-a="closesheet"]')&&t.classList.contains('sheet-bg'))return;S.sheet=null;render();return}
  switch(k){
   case 'ob':S.obi=+v;render();break;
-  case 'start':S.ob=false;S.role=v;S.navAnim=true;render();break;
+  case 'start':S.ob=false;S.role=v;render();break;
   case 'roles':S.sheet='roles';render();break;
-  case 'role':setRole(v);S.navAnim=true;render();break;
+  case 'role':setRole(v);render();break;
   case 'hintok':S.seenHint[S.role]=true;render();break;
   case 'log':S.log={p:+v,picks:[],hw:false,copy:TEACH.filter(x=>!x.cover&&x.p!==+v&&!S.tlog[x.p]).map(x=>x.p),start:null};S.seenHint.teacher=true;S.noScrollKeep=true;render();break;
   case 'pick':{const L=S.log,i=+v;if(!L.start)L.start=Date.now();L.picks.includes(i)?L.picks.splice(L.picks.indexOf(i),1):L.picks.push(i);vib(8);render();break}

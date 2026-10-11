@@ -2087,7 +2087,7 @@ const tile=k=>`<span class="s g" style="--sc:${SUB[k].c}">${GLY[k]||SVGG[k]||SUB
 const CK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
 const slot=(c,j)=>`<i class="${c} ${j?'just':''}">${c==='ok'?CK:c==='pend'?'؟':''}</i>`;
 const DAY=[{p:1,k:'ar',tm:'8:00'},{p:2,k:'sci',tm:'8:50'},{p:3,k:'math',tm:'9:40',cover:'أ. حسين · احتياطي'},{p:4,k:'en',tm:'10:50'},{p:5,k:'soc',tm:'11:40',now:1},{p:6,k:'art',tm:'12:30',up:1}];
-const TEACH=[{p:1,cls:'4/2',tm:'8:00',kid:1},{p:2,cls:'4/1',tm:'8:50'},{p:3,cls:'5/1',tm:'9:40',cover:1},{p:4,cls:'4/3',tm:'10:50'}];
+const TEACH=[{p:1,cls:'4B',tm:'8:00',kid:1},{p:2,cls:'4A',tm:'8:50'},{p:3,cls:'5A',tm:'9:40',cover:1},{p:4,cls:'4C',tm:'10:50'}];
 const ROLE={
  parent:{n:'ولي الأمر',who:'أحمد سامي · والد يوسف',c:'var(--brand)',i:'user',d:'يعرف ابنه أخد إيه النهاردة'},
  teacher:{n:'المدرس',who:'أ. سامية فتحي · لغة عربية',c:'#E8764A',i:'book',d:'يسجّل الحصة في أقل من 15 ثانية'},
@@ -2113,10 +2113,10 @@ const logged=()=>168+Object.keys(S.tlog).length;
 
 /* ---------- teacher kurrasa data ---------- */
 const TTH=[
- {id:'yousef',n:'والد يوسف',kid:'يوسف أحمد',cls:'4/2',c:'#3B4FA8'},
- {id:'jana',n:'والدة جنى',kid:'جنى أسامة',cls:'4/2',c:'#C2185B',msgs:[{them:1,t:'جنى نسيت كراسة النحو في الفصل، ممكن تفضل معاكي لبكره؟',m:'10:05'}],reply:'شكرًا جدًا يا أستاذة 🙏'},
- {id:'malek',n:'والدة مالك',kid:'مالك طارق',cls:'4/1',c:'#2E7D32',msgs:[{them:1,t:'مالك عنده صعوبة في الإملاء، ممكن نعمل إيه في البيت؟',m:'9:20'}],reply:'تمام، هنمشي عليها من النهاردة'},
- {id:'nour',n:'والد نور',kid:'نور حازم',cls:'4/3',c:'#B5651D',msgs:[{them:1,t:'هو الكويز يوم الخميس هيبقى على أنهي دروس؟',m:'امبارح',read:1},{them:0,t:'على المبتدأ والخبر بس 👍',m:'امبارح',seen:1}]}
+ {id:'yousef',n:'والد يوسف',kid:'يوسف أحمد',cls:'4B',c:'#3B4FA8'},
+ {id:'jana',n:'والدة جنى',kid:'جنى أسامة',cls:'4B',c:'#C2185B',msgs:[{them:1,t:'جنى نسيت كراسة النحو في الفصل، ممكن تفضل معاكي لبكره؟',m:'10:05'}],reply:'شكرًا جدًا يا أستاذة 🙏'},
+ {id:'malek',n:'والدة مالك',kid:'مالك طارق',cls:'4A',c:'#2E7D32',msgs:[{them:1,t:'مالك عنده صعوبة في الإملاء، ممكن نعمل إيه في البيت؟',m:'9:20'}],reply:'تمام، هنمشي عليها من النهاردة'},
+ {id:'nour',n:'والد نور',kid:'نور حازم',cls:'4C',c:'#B5651D',msgs:[{them:1,t:'هو الكويز يوم الخميس هيبقى على أنهي دروس؟',m:'امبارح',read:1},{them:0,t:'على المبتدأ والخبر بس 👍',m:'امبارح',seen:1}]}
 ];
 const QUICK=['تمام، هتابعه بكره في الحصة','هبعتله ورقة تدريب زيادة','ممكن نتكلم في اجتماع الخميس؟','شكرًا لحضرتك على المتابعة'];
 function thMsgs(th){if(th.id==='yousef')return S.chat.map(m=>({them:m.me,t:m.t,m:m.m.replace(' · اتقرت','').replace(' · اتبعتت',''),seen:!m.me,img:m.img}));return th.msgs}
@@ -2142,7 +2142,7 @@ function pToday(){
   if(g)return `<div class="ls ${fl}" id="ls${d.p}">${tile(d.k)}<div class="x"><b>${s.n}</b><small>${who}</small>${g.items.map(i=>`<div class="it">${I('check')}${esc(s.items[i])}</div>`).join('')}${g.hw?`<span class="hw">${I('file')} واجب: ${esc(g.hw)}</span>`:''}</div><span class="tm num">${d.tm}</span></div>`;
   return `<div class="ls pend" id="ls${d.p}">${tile(d.k)}<div class="x"><b>${s.n}</b><small>${who}</small>${d.p===1?`<button class="tryit" data-a="role:teacher">سجّلها كمدرس ${I('arrowl','width:14px;height:14px')}</button>`:''}</div><span class="pp">لسه ماتسجلتش</span></div>`}).join('');
  return kids+`
- <div class="day" id="dayhero"><div class="k"><div><b>يوسف</b><div class="live"><i></i>النهاردة · مباشر</div></div><small>الثلاثاء 6 أكتوبر<br>الرابع الابتدائي · 4/2</small></div>
+ <div class="day" id="dayhero"><div class="k"><div><b>يوسف</b><div class="live"><i></i>النهاردة · مباشر</div></div><small>الثلاثاء 6 أكتوبر<br>الرابع الابتدائي · 4B</small></div>
  <div class="sum"><b>${lg} من ${endedL.length}</b> حصص اتسجلت · <b>${hw.length}</b> مطلوب لبكره</div>
  <div class="pers">${DAY.map(d=>slot(!SUB[d.k].items?(ended(d.p)?'na':'up'):d.now?'now':d.up?'up':S.logs[d.p]?'ok':'pend',S.flash==='p'+d.p)).join('')}</div>
  <div class="plab num">${DAY.map(d=>`<span>${d.tm}</span>`).join('')}</div></div>
@@ -2207,8 +2207,8 @@ function ctaBlock(full){return `${full?'<div class="title">ده جزء صغير<
 /* ---------- onboarding ---------- */
 function onboarding(){const i=S.obi;
  return `<div class="ob" id="ob"><button class="skip" data-a="ob:2">تخطّي</button><div class="slides" id="slides" style="transform:translateX(${i*100}%)">
-  <div class="sl"><div class="wa"><div class="h">${I('users','width:18px;height:18px')}<div><b>أولياء أمور 4/2 📚</b><small>86 عضو</small></div><span class="u num" id="unread">12</span></div><div class="ms" id="wams"></div></div><span class="kick">الساعة 9 بالليل</span><h2>كل ليلة، نفس السؤال:<br><em>هو أخد إيه النهاردة؟</em></h2><p>جروب فيه مية رسالة، وكراسة ورق راجعة ناقصة.</p></div>
-  <div class="sl"><div class="mini-today"><div class="hr"><small>الثلاثاء · 4/2</small><b>يوم يوسف النهاردة</b></div>${[['عر','اللغة العربية','#2F6B58'],['عل','العلوم','#1F7A8C'],['ري','الرياضيات · واجب ص 24','#3B4FA8']].map((r,k)=>`<div class="rw" style="animation-delay:${.3+k*.35}s"><span class="s" style="background:${r[2]}">${r[0]}</span>${r[1]}<span class="c">${I('check','width:15px;height:15px;stroke-width:2.6')}</span></div>`).join('')}</div><span class="kick">من بكره</span><h2>أسبوع ابنك الدراسي<br><em>في جيبك</em></h2><p>اللي اتشرح، والمطلوب لبكره، واللي جاي. من غير ما تسأل حد.</p></div>
+  <div class="sl"><div class="wa"><div class="h">${I('users','width:18px;height:18px')}<div><b>أولياء أمور 4B 📚</b><small>86 عضو</small></div><span class="u num" id="unread">12</span></div><div class="ms" id="wams"></div></div><span class="kick">الساعة 9 بالليل</span><h2>كل ليلة، نفس السؤال:<br><em>هو أخد إيه النهاردة؟</em></h2><p>جروب فيه مية رسالة، وكراسة ورق راجعة ناقصة.</p></div>
+  <div class="sl"><div class="mini-today"><div class="hr"><small>الثلاثاء · 4B</small><b>يوم يوسف النهاردة</b></div>${[['عر','اللغة العربية','#2F6B58'],['عل','العلوم','#1F7A8C'],['ري','الرياضيات · واجب ص 24','#3B4FA8']].map((r,k)=>`<div class="rw" style="animation-delay:${.3+k*.35}s"><span class="s" style="background:${r[2]}">${r[0]}</span>${r[1]}<span class="c">${I('check','width:15px;height:15px;stroke-width:2.6')}</span></div>`).join('')}</div><span class="kick">من بكره</span><h2>أسبوع ابنك الدراسي<br><em>في جيبك</em></h2><p>اللي اتشرح، والمطلوب لبكره، واللي جاي. من غير ما تسأل حد.</p></div>
   <div class="sl"><span class="kick">دقيقتين بس</span><h2>جرّبه <em>بنفسك</em></h2><p>اختار تشوف التطبيق كـ:</p><div class="roles">${Object.entries(ROLE).map(([k,r])=>`<button class="rolebtn" data-a="start:${k}"><span class="ic" style="background:${k==='principal'?'#55534D':r.c}">${I(r.i,'width:22px;height:22px')}</span><span><b>${r.n}</b><small>${r.d}</small></span><span class="ar">${I('arrowl')}</span></button>`).join('')}</div></div>
  </div><div class="foot"><div class="dots">${[0,1,2].map(k=>`<i class="${k===i?'on':''}"></i>`).join('')}</div>${i<2?`<button class="btn hot" data-a="ob:${i+1}">${i===0?'فيه حل':'جرّبه'} ${I('arrowr','width:18px;height:18px')}</button>`:'<div style="height:50px"></div>'}</div></div>`}
 
@@ -2244,7 +2244,7 @@ function sheet(){const k=S.sheet;
  <div class="field" style="margin-bottom:14px"><label>الوقت المناسب</label><div class="slots">${['الصبح','بعد الضهر','بالليل'].map(r=>`<button class="${S.book.slot===r?'on':''}" data-a="bkslot:${r}">${r}</button>`).join('')}</div></div>
  <button class="btn" style="background:#1FA855" data-a="sendbook">${I('wa')} ابعت الطلب على واتساب</button><p class="muted" style="font-size:11.5px;text-align:center;margin:8px 0 0">بيفتح واتساب برسالة جاهزة، وإنت اللي بتدوس إرسال</p></div></div>`;
  if(k==='booked')return `<div class="sheet-bg" data-a="closesheet"><div class="sheet" data-stop="1" style="text-align:center"><div class="grab"></div><div style="width:70px;height:70px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;margin:0 auto 10px;animation:pop .5s var(--ease)">${I('check','width:34px;height:34px;stroke-width:2.6')}</div><h2>الرسالة جاهزة</h2><p class="lead">${CONTACT_WA?'واتساب اتفتح برسالتك. ابعتها وهنرد عليك في نفس اليوم.':'رقم الواتساب هيتضاف قريب. ده اللي هيتبعت:'}</p><div class="card" style="margin:0 0 12px;text-align:right;font-size:13px;white-space:pre-line">${esc(S.bookText||'')}</div><button class="btn ghost" data-a="closesheet">تمام</button></div></div>`;
- if(k==='bcast')return `<div class="sheet-bg" data-a="closesheet"><div class="sheet" data-stop="1"><div class="grab"></div><h2>رسالة لفصل كامل</h2><p class="lead">بتوصل لكل ولي أمر في محادثته، ومحدش بيشوف رد التاني. مش جروب.</p><div class="slots" style="margin-bottom:12px"><button class="on">4/2 · 24</button><button>4/1 · 26</button><button>4/3 · 25</button></div><div class="field" style="margin-bottom:12px"><textarea>بكره هنراجع المبتدأ والخبر قبل كويز الخميس، ياريت الطلاب يجيبوا كراسة النحو.</textarea></div><button class="btn brand" data-a="sendbcast">${I('send')} ابعت لـ 24 ولي أمر</button></div></div>`;
+ if(k==='bcast')return `<div class="sheet-bg" data-a="closesheet"><div class="sheet" data-stop="1"><div class="grab"></div><h2>رسالة لفصل كامل</h2><p class="lead">بتوصل لكل ولي أمر في محادثته، ومحدش بيشوف رد التاني. مش جروب.</p><div class="slots" style="margin-bottom:12px"><button class="on">4B · 24</button><button>4A · 26</button><button>4C · 25</button></div><div class="field" style="margin-bottom:12px"><textarea>بكره هنراجع المبتدأ والخبر قبل كويز الخميس، ياريت الطلاب يجيبوا كراسة النحو.</textarea></div><button class="btn brand" data-a="sendbcast">${I('send')} ابعت لـ 24 ولي أمر</button></div></div>`;
  if(k==='complaint')return `<div class="sheet-bg" data-a="closesheet"><div class="sheet" data-stop="1"><div class="grab"></div><h2>شكوى للإدارة</h2><p class="lead">بتروح للمدير مباشرة، وحالتها بتبان هنا: جديدة، بتتابَع، اتقفلت.</p><div class="field" style="margin-bottom:12px"><input value="الأتوبيس بيتأخر ربع ساعة الصبح"></div><button class="btn" data-a="sendcomplaint">${I('send')} ابعت</button></div></div>`;
  return '';
 }
@@ -2316,7 +2316,7 @@ document.addEventListener('click',e=>{
   case 'tattach':tSend('بعتلك ورقة تدريب على الدرس، يحلها النهاردة لو ينفع',true);break;
   case 'tsend':{const el=document.getElementById('tmsg');const tx=(el&&el.value.trim())||QUICK[0];tSend(tx);break}
   case 'bcast':S.sheet='bcast';render();break;
-  case 'sendbcast':S.sheet=null;vib(30);toast('اتبعتت لـ 24 ولي أمر في 4/2 · اتقرت 9 لحد دلوقتي');render();break;
+  case 'sendbcast':S.sheet=null;vib(30);toast('اتبعتت لـ 24 ولي أمر في 4B · اتقرت 9 لحد دلوقتي');render();break;
   case 'complaint':S.sheet='complaint';render();break;
   case 'sendcomplaint':S.sheet=null;toast('الشكوى وصلت للمدير · حالتها: جديدة');render();break;
   case 'pay':S.payPick=v;render();break;
